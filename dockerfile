@@ -3,10 +3,7 @@ FROM jenkins/jenkins:2.251
 USER root
 
 #UBUNTU UTILITIES
-RUN apt-get update && apt-get install -y build-essential nano jq
-
-#MAVEN
-RUN apt-get update && apt-get install -y maven
+RUN apt-get update && apt-get install -qqy build-essential nano jq maven
 
 #DOCKER
 RUN cd /tmp/ \
@@ -24,6 +21,45 @@ RUN cd /tmp/ \
 #RUN wget http://svdlctyhsladt01/drive/fileslibs/karate/karate-0.9.5.jar -P /opt/karate
 
 USER jenkins
+
+ENV JENKINS_USER admin
+ENV JENKINS_PASS admin
+
+#skip initial setup
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+
+# install Organisation and Administration plugins
+
+RUN /usr/local/bin/install-plugins.sh ace-editor
+
+# install workflow plugins
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator
+RUN /usr/local/bin/install-plugins.sh workflow-api
+RUN /usr/local/bin/install-plugins.sh workflow-basic-steps
+RUN /usr/local/bin/install-plugins.sh workflow-cps-global-lib
+RUN /usr/local/bin/install-plugins.sh workflow-cps
+RUN /usr/local/bin/install-plugins.sh workflow-durable-task-step
+RUN /usr/local/bin/install-plugins.sh workflow-job
+RUN /usr/local/bin/install-plugins.sh workflow-multibranch
+RUN /usr/local/bin/install-plugins.sh workflow-scm-step
+RUN /usr/local/bin/install-plugins.sh workflow-step-api
+RUN /usr/local/bin/install-plugins.sh workflow-support
+
+
+RUN /usr/local/bin/install-plugins.sh bouncycastle-api
+RUN /usr/local/bin/install-plugins.sh credentials
+RUN /usr/local/bin/install-plugins.sh structs
+RUN /usr/local/bin/install-plugins.sh ssh-agent
+RUN /usr/local/bin/install-plugins.sh ssh-credentials
+
+
+RUN /usr/local/bin/install-plugins.sh git-client
+RUN /usr/local/bin/install-plugins.sh git-server
+RUN /usr/local/bin/install-plugins.sh git
+RUN /usr/local/bin/install-plugins.sh maven-plugin
+
+
+
 
 
 
