@@ -28,35 +28,34 @@ ENV JENKINS_PASS admin
 #skip initial setup
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
-# install Organisation and Administration plugins
-
+# Administration plugins
 RUN /usr/local/bin/install-plugins.sh ace-editor
 
-# install workflow plugins
-RUN /usr/local/bin/install-plugins.sh workflow-aggregator
-RUN /usr/local/bin/install-plugins.sh workflow-api
-RUN /usr/local/bin/install-plugins.sh workflow-basic-steps
-RUN /usr/local/bin/install-plugins.sh workflow-cps-global-lib
-RUN /usr/local/bin/install-plugins.sh workflow-cps
-RUN /usr/local/bin/install-plugins.sh workflow-durable-task-step
-RUN /usr/local/bin/install-plugins.sh workflow-job
-RUN /usr/local/bin/install-plugins.sh workflow-multibranch
-RUN /usr/local/bin/install-plugins.sh workflow-scm-step
-RUN /usr/local/bin/install-plugins.sh workflow-step-api
-RUN /usr/local/bin/install-plugins.sh workflow-support
+# Pipeline
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator \
+    && /usr/local/bin/install-plugins.sh workflow-api \
+    && /usr/local/bin/install-plugins.sh workflow-basic-steps \
+    && /usr/local/bin/install-plugins.sh workflow-cps-global-lib \
+    && /usr/local/bin/install-plugins.sh workflow-cps \
+    && /usr/local/bin/install-plugins.sh workflow-durable-task-step \
+    && /usr/local/bin/install-plugins.sh workflow-job \
+    && /usr/local/bin/install-plugins.sh workflow-multibranch \
+    && /usr/local/bin/install-plugins.sh workflow-scm-step \
+    && /usr/local/bin/install-plugins.sh workflow-step-api \
+    && /usr/local/bin/install-plugins.sh workflow-support 
 
+# Credentials
+RUN /usr/local/bin/install-plugins.sh bouncycastle-api \
+    && /usr/local/bin/install-plugins.sh credentials \
+    && /usr/local/bin/install-plugins.sh structs \
+    && /usr/local/bin/install-plugins.sh ssh-agent \
+    && /usr/local/bin/install-plugins.sh ssh-credentials 
 
-RUN /usr/local/bin/install-plugins.sh bouncycastle-api
-RUN /usr/local/bin/install-plugins.sh credentials
-RUN /usr/local/bin/install-plugins.sh structs
-RUN /usr/local/bin/install-plugins.sh ssh-agent
-RUN /usr/local/bin/install-plugins.sh ssh-credentials
-
-
-RUN /usr/local/bin/install-plugins.sh git-client
-RUN /usr/local/bin/install-plugins.sh git-server
-RUN /usr/local/bin/install-plugins.sh git
-RUN /usr/local/bin/install-plugins.sh maven-plugin
+# Git
+RUN /usr/local/bin/install-plugins.sh git-client \
+    && /usr/local/bin/install-plugins.sh git-server \
+    && /usr/local/bin/install-plugins.sh git \
+    && /usr/local/bin/install-plugins.sh maven-plugin
 
 
 
