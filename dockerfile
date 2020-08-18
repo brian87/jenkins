@@ -20,6 +20,9 @@ RUN cd /tmp/ \
     && groupadd -for -g 986 docker \
     && usermod -aG docker jenkins
 
+#Adding jenkins user to root group for fixing  permission in OSX
+RUN gpasswd -a jenkins root
+
 #KARATE API
 #RUN wget http://svdlctyhsladt01/drive/fileslibs/karate/karate-0.9.5.jar -P /opt/karate
 
