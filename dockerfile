@@ -7,12 +7,15 @@ RUN apt-get update && apt-get install -qqy build-essential nano jq maven
 
 #DOCKER
 RUN cd /tmp/ \
-    && curl https://download.docker.com/linux/static/stable/x86_64/docker-19.03.9.tgz  -o docker.tgz \
+    && curl -o docker.tgz \
+    https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz \
     && tar zxf docker.tgz \
-    && mkdir -p /usr/local/bin/docker \
+    && mkdir -p /usr/local/bin \
+    && mv ./docker/docker /usr/local/bin/ \
     && chmod +x /usr/local/bin/docker \
     && rm -rf /tmp/* \
-    && curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose \
+    && curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-Linux-x86_64 \
+    -o /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose \
     && groupadd -for -g 986 docker \
     && usermod -aG docker jenkins
