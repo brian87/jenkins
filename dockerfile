@@ -23,8 +23,8 @@ RUN cd /tmp/ \
 #Adding jenkins user to root group for fixing  permission in OSX
 RUN gpasswd -a jenkins root
 
-#KARATE API
-#RUN wget http://svdlctyhsladt01/drive/fileslibs/karate/karate-0.9.5.jar -P /opt/karate
+# KARATE API
+RUN wget https://github.com/intuit/karate/releases/download/v0.9.5/karate-0.9.5.jar -P  /opt/karate/
 
 USER jenkins
 
