@@ -19,3 +19,4 @@ git-client
 git-server
 git
 maven-plugin
+htmlpublisher
