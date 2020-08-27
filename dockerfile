@@ -31,8 +31,8 @@ USER jenkins
 ENV JENKINS_USER admin
 ENV JENKINS_PASS admin
 
-#skip initial setup
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+#Skip initial setup and allow js/css access
+ENV JAVA_OPTS $JAVA_OPTS -Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP=
 
 #plugins
 COPY plugins.txt /usr/share/jenkins/plugins.txt
