@@ -24,7 +24,7 @@ RUN cd /tmp/ \
 RUN gpasswd -a jenkins root
 
 # KARATE API
-RUN wget https://github.com/intuit/karate/releases/download/v0.9.5/karate-0.9.5.jar -P  /opt/karate/
+RUN wget https://github.com/intuit/karate/releases/download/v0.9.6/karate-0.9.6.jar -P  /opt/karate/
 
 USER jenkins
 
